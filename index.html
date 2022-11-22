@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Pokemon</title>
+</head>
+
+<body>
+    <h1 class="display-3 w-100 text-center mt-5 text-primary">Batalla Pokemon</h1>
+    <p class="w-100 text-center mt-3">Seleccione a los pokemones para la batalla</p>
+    <div class="d-flex flex-row justify-content-around w-100 mt-5" id="listarPokemon">
+        <section class="d-flex flex-column justify-content-center align-items-center">
+            <h5 id="pok-name-1"></h5>
+            <img id="pok-img-1" src="">
+            <h2 class="fs-2 lead">Habilidades</h2>
+            <ul id="pok-hab-1" class="w-100 d-flex justify-content-center align-items-center flex-column">
+
+            </ul>
+        </section>
+        <div class="d-flex justify-content-center align-items-center flex-column">
+            <button class="m-2 btn btn-success" id="seleccionar">Seleccionar</button>
+            <h4 class="lead m-2">VS</h4>
+        </div>
+        <section class="d-flex flex-column justify-content-center align-items-center">
+            <h5 id="pok-name-2"></h5>
+            <img id="pok-img-2">
+            <h2 class="fs-2 lead">Habilidades</h2>
+            <ul id="pok-hab-2" class="w-100 d-flex justify-content-center align-items-center flex-column">
+
+            </ul>
+        </section>
+    </div>
+    <div class="container mt-5 ">
+        <h2 class="w-100 text-center text-primary m-5 fs-1 lead">Lista de Usuarios</h2>
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="data">
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="2-100 text-center mt-5">Todos los derechos reservados @EnnoviQ</p>
+        <script src="./api.js" type="module"></script>
+        <script src="./datosPokemon.js" type="module"></script>
+        
+</body>
+
+</html>
