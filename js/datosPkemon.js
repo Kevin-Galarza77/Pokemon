@@ -21,52 +21,69 @@ btnSeleccionar();
 
 const lista = document.getElementById("listarpokemon");
 const modals = document.getElementById("modals");
+const d=document;
 
 const pintarPokemon = (data, id) => {
-    console.log(data);
     let item = lista.querySelector(`#pok-${id}`);
     let modal = modals.querySelector(`#modal-pok-${id}`);
     item.getElementsByTagName("img")[0].setAttribute("src", data.sprites.front_default);
     item.getElementsByTagName("p")[0].innerHTML = data.name.toUpperCase();
     modal.getElementsByTagName("h2")[0].innerHTML = data.name.toUpperCase();
-    let imagenes = '';
+    let $imagenes = '';
+    let $contenedor=d.createElement("div");
     for (const property in data.sprites) {
-        console.log();
         if (data.sprites[property] && typeof (data.sprites[property]) === "string") {
-            imagenes += `<img src="${data.sprites[property]}" alt="${property}">`;
+            let $imagen = new Image();
+            $imagen.src=data.sprites[property];
+            $contenedor.appendChild($imagen);
         }
     }
-    imagenes += `<hr>
-    <div class="d-flex justify-content-between align-items-center">
-        <h6 class="text-primary fs-6">Experiencia Base</h6>
-        <p class="text-dark fs-6">${data.base_experience}</p>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between align-items-center">
-        <h6 class="text-primary fs-6">Altura (Decímetros)</h6>
-        <p class="text-dark fs-6">${data.height}</p>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between align-items-center">
-        <h6 class="text-primary fs-6">Peso (Hectogramos)</h6>
-        <p class="text-dark fs-6">${data.weight}</p>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between align-items-center">
-        <h6 class="text-primary fs-6">Especie</h6>
-        <p class="text-dark fs-6">${data.species.name}</p>
-    </div>
-    <hr>
-    <div class="d-flex justify-content-between align-items-center">
-        <h6 class="text-primary fs-6">Slot y Tipos</h6>
-    `
-    console.log(data.game_indices);
+    modal.getElementsByClassName("modal-body")[0].appendChild($contenedor);
+    
+    let detalles = ["Experiencia Base",data.base_experience,"Altura (Decímetros)",data.height,"Peso (Hectogramos)",data.weight,"Especie",data.species.name]
+    
+    
+    for (let index = 0; index < detalles.length; index+=2) {
+        let $contenedorDescripciones=d.createElement("div")
+        $contenedorDescripciones.className="d-flex justify-content-between align-items-center";
+        let $descripcion=`<h6 class="text-primary fs-6">${detalles[index]}</h6> <p class="text-dark fs-6">${detalles[index+1]}</p>`;
+        $contenedorDescripciones.innerHTML=$descripcion;
+        console.log($contenedorDescripciones);
+        modal.getElementsByClassName("modal-body")[0].appendChild($contenedorDescripciones);
+        modal.getElementsByClassName("modal-body")[0].appendChild(d.createElement("hr"));
+    }
+
+    // $imagenes += `<hr>
+    // <div class="d-flex justify-content-between align-items-center">
+    //     <h6 class="text-primary fs-6">Experiencia Base</h6>
+    //     <p class="text-dark fs-6">${data.base_experience}</p>
+    // </div>
+    // <hr>
+    // <div class="d-flex justify-content-between align-items-center">
+    //     <h6 class="text-primary fs-6">Altura (Decímetros)</h6>
+    //     <p class="text-dark fs-6">${}</p>
+    // </div>
+    // <hr>
+    // <div class="d-flex justify-content-between align-items-center">
+    //     <h6 class="text-primary fs-6"></h6>
+    //     <p class="text-dark fs-6">${}</p>
+    // </div>
+    // <hr>
+    // <div class="d-flex justify-content-between align-items-center">
+    //     <h6 class="text-primary fs-6"></h6>
+    //     <p class="text-dark fs-6">${}</p>
+    // </div>
+    // <hr>
+    // <div class="d-flex justify-content-between align-items-center">
+    //     <h6 class="text-primary fs-6">Slot y Tipos</h6>
+    // `
+
     let game_indices = "<ul class='list-group list-group-numbered'>";
     for (let index = 0; index < data.types.length; index++) {
         game_indices += `<li class='text-end'>${data.types[index].slot} ${data.types[index].type.name}</li>`
     }
     game_indices += "</ul>"
-    imagenes += game_indices + `</div><hr>
+    $imagenes += game_indices + `</div><hr>
         <div class="d-flex justify-content-between align-items-center">
         <h6 class="text-primary fs-6">Lista de Elementos</h6>
     `
@@ -79,8 +96,8 @@ const pintarPokemon = (data, id) => {
         }
     }
     elementos += "</ul>"
-    imagenes += elementos + `</div><hr>`
-    modal.getElementsByClassName("modal-body")[0].innerHTML = imagenes;
+    $imagenes += elementos + `</div><hr>`
+    // modal.getElementsByClassName("modal-body")[0].innerHTML = $imagenes;
     let skills = ``
     for (let index = 0; index < data.abilities.length; index++) {
         skills += `<li>${data.abilities[index].ability.name} </li>`
